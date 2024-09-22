@@ -6,67 +6,64 @@ using Microsoft.AspNetCore.Mvc; //Api web
 using Microsoft.Extensions.Logging; //inf sobre a app
 
 using ProEventos.API.Models;
-namespace ProEventos.API.Controllers
+using ProEventos.API.Data;
 
+namespace ProEventos.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class EventoController : ControllerBase
     {
-    
-        public IEnumerable<Evento> _evento = new Evento[]{ //estanciar um array
-        
-                new Evento(){
-                    EventoId = 1,
-                    Tema = "Angular 11 e .NET 5",
-                    Local = "Belo Horizonte",
-                    Lote= "1º Lote",
-                    QtdPessoas = 250,
-                    DataEvento = DateTime.Now.AddDays(2),
-                    ImagemURL = "img.png"
-                }, 
-                new Evento(){
-                    EventoId = 2,
-                    Tema = "Angular 11 e .NET 5 e suas novidades",
-                    Local = "Belo Horizonte",
-                    Lote= "2º Lote",
-                    QtdPessoas = 350,
-                    DataEvento = DateTime.Now.AddDays(3), //tipar o valor
-                    ImagemURL = "img.png"
-                   
-                },
-                
-                
-            };
-        public EventoController()
-        {  
+        private readonly DataContext _context;
+
+        public EventoController(DataContext context)
+        {
+            _context = context;
         }
 
         [HttpGet]
         public IEnumerable<Evento> Get()
         {
-           return _evento;
-        }
-         [HttpGet("{id}")]
-        public IEnumerable<Evento> GetById(int id)
-        {
-           return _evento.Where(evento => evento.EventoId == id );
+            return _context.Eventos;
         }
 
-         [HttpPost]
-        public String Post()
+        [HttpGet("{id}")]
+        public Evento GetById(int id)
         {
-            return "Exemplo de post";
+            return _context.Eventos.FirstOrDefault(evento => evento.EventoId == id);
+            
         }
-         [HttpPut("{id}")]
-        public String Put(int id)
+
+        [HttpPost]
+        public IActionResult Post(Evento evento)
         {
-            return $"Exemplo de Put com id = {id}";
+            _context.Eventos.Add(evento);
+            _context.SaveChanges();
+            return Ok(evento);
         }
-         [HttpDelete("{id}")]
-        public String Delete(int id)
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Evento evento)
         {
-            return $"Exemplo de Delete com id = {id}";
+            var eventoExistente = _context.Eventos.FirstOrDefault(e => e.EventoId == id);
+            if (eventoExistente == null) return NotFound();
+
+            eventoExistente.Nome = evento.Nome;
+            // Atualizar outros campos conforme necessário
+
+            _context.SaveChanges();
+            return Ok(eventoExistente);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var evento = _context.Eventos.FirstOrDefault(e => e.EventoId == id);
+            if (evento == null) return NotFound();
+
+            _context.Eventos.Remove(evento);
+            _context.SaveChanges();
+            return Ok();
         }
     }
 }

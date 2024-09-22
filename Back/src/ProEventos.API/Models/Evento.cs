@@ -1,10 +1,12 @@
 using System;
+using ProEventos.API;
 namespace ProEventos.API.Models
 
 {
     public class Evento
     {
         public int EventoId { get; set; }
+        public string Nome { get; set; }
         public string Local {get; set; }
         public DateTime DataEvento {get; set; }
         public string Tema {get; set; }
@@ -12,7 +14,7 @@ namespace ProEventos.API.Models
         public string Lote {get; set; }
         public string  ImagemURL {get; set; }
     
-    }
+    } 
 } //como é composta uma classe
 //classe public privada e abstrata 
 
