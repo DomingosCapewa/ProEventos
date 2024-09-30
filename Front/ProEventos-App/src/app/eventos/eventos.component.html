@@ -7,8 +7,8 @@
       type="text"
       class="form-control mr-2"
       placeholder="buscar"
-      [(ngModel)]="filtroLista"
-    />
+      [(ngModel)]="filtroLista" 
+    /><!--ligação de dados bidirecional-->
 
   </div>
 </div>
@@ -34,7 +34,7 @@
       <th>Opções</th>
     </tr>
   </thead>
-  <tbody *ngIf="eventos && eventos.length">
+  <tbody *ngIf="eventos && eventos.length" >
     <tr *ngFor="let eventos of eventosFiltrados">
       <td>
         <img
