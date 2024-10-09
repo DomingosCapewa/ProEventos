@@ -7,9 +7,8 @@
       type="text"
       class="form-control mr-2"
       placeholder="buscar"
-      [(ngModel)]="filtroLista" 
+      [(ngModel)]="filtroLista"
     /><!--ligação de dados bidirecional-->
-
   </div>
 </div>
 
@@ -22,7 +21,8 @@
           class="btn btn-outline-light btn-sm"
           (click)="alterarImagem()"
         >
-          {{ !exibirImagem ? "exibir" : "ocultar" }}
+        <i class="{{!exibirImagem ? 'fa fa-eye' : 'fa fa-eye-slash' }}"></i>
+           {{ !exibirImagem ? "exibir" : "ocultar" }}
         </button>
       </th>
       <th>#</th>
@@ -34,7 +34,7 @@
       <th>Opções</th>
     </tr>
   </thead>
-  <tbody *ngIf="eventos && eventos.length" >
+  <tbody *ngIf="eventos && eventos.length">
     <tr *ngFor="let eventos of eventosFiltrados">
       <td>
         <img
@@ -46,14 +46,23 @@
           [style.margin.px]="margemImagem"
         />
       </td>
-      <td>{{ eventos.eventoId }}</td>
+      <td>{{ eventos.id }}</td>
       <td>{{ eventos.tema }}</td>
       <td>{{ eventos.local }}</td>
-      <td>{{ eventos.dataEvento }}</td>
+      <td>{{ eventos.dataEvento | date }}</td>
       <td>{{ eventos.qtdPessoas }}</td>
-      <td>{{ eventos.lote }}</td>
-      <td><button type="button" class="btn btn-primary btn-lsm mr-2">Editar</button>
-        <button type="button" class="btn btn-danger btn-lg mr-2" >Excluir</button></td>
+      <td>{{ eventos.lotes[0].nome }}</td>
+      <td>
+
+        <button type="button" class="btn btn-primary btn-md mr-2">
+          <i class='fa fa-edit'></i>
+          Editar
+        </button>
+        <button type="button" class="btn btn-danger btn-md">
+          <i class='fa fa-trash'></i>
+          Excluir
+        </button>
+      </td>
     </tr>
   </tbody>
   <tfoot *ngIf="eventos && !eventos.length">
