@@ -1,9 +1,10 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { EventoService } from '../Services/eventos.service';
-import { Evento } from '../models/Evento';
+import { EventoService } from '../../Services/eventos.service';
+import { Evento } from '../../models/Evento';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-eventos',
@@ -72,9 +73,9 @@ export class EventosComponent implements OnInit {
         this.toastr.error('Erro ao carregar os Eventos', 'Erro!');
       },
       complete: () => {
-        clearTimeout(hideSpinner); 
+        clearTimeout(hideSpinner);
         this.spinner.hide();
-      }
+      },
     });
   }
 
