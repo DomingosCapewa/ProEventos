@@ -2,9 +2,6 @@
   <div class="d-flex">
     <div class="flex-fill pr-3">
       <div class="form-group mb-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Filtro:</div>
-        </div>
         <input
           type="text"
           class="form-control"
@@ -44,8 +41,8 @@
         <th>Opções</th>
       </tr>
     </thead>
-    <tbody *ngIf="eventos && eventos.length">
-      <tr *ngFor="let evento of eventosFiltrados" (click)="detalheEvento(evento.id)" style="cursor: pointer;">
+    <tbody *ngIf="eventos && eventos.length"><!--(click)="detalheEvento(evento.id)"-->
+      <tr *ngFor="let evento of eventosFiltrados" >
         <td class="d-none d-md-table-cell">
           <img
             [collapse]="!exibirImagem"
@@ -66,6 +63,14 @@
         </td>
         <td>
           <button
+          type="button"
+          class="btn btn-primary btn-lg mr-2"
+          tooltip="Editar"
+          (click)="detalheEvento(evento.id)"
+        >
+          <i class="fa fa-edit"></i>
+        </button>
+          <button
             type="button"
             class="btn btn-danger btn-lg"
             tooltip="Excluir"
@@ -73,7 +78,10 @@
           >
             <i class="fa fa-trash"></i>
           </button>
+
         </td>
+          <td>
+          </td>
       </tr>
     </tbody>
     <tfoot *ngIf="eventos && !eventos.length">

@@ -148,5 +148,9 @@
       "app",
       "kebab-case"
     ]
+  },
+  "angularCompilerOptions":{
+    "strictTemplates": true,
+    "strictInjectionParameters": true
   }
 }
