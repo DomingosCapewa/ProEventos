@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace ProEventos.Domain
 
 {
+
+    [Table("EventosDetalhes")]
     public class Evento
     {
         public int Id { get; set; }
@@ -33,3 +36,4 @@ namespace ProEventos.Domain
 
 // dados que são enviados e recebidos nas requisições HTTP.
  //Interfaces e classes abstratas ajudam a organizar e reutilizar o código na programação orientada a objetos.
+//Entity Framework Tutorial
