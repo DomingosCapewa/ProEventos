@@ -88,6 +88,7 @@ export class EventoListaComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   openModal(template: TemplateRef<any>, eventoId: number): void {
     this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
@@ -115,6 +116,20 @@ export class EventoListaComponent implements OnInit {
       })
       .add(() => this.spinner.hide());
   }
+=======
+  public openModal(template: TemplateRef<any>, eventoId: number): void {
+    this.eventoId = eventoId
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public confirm(): void {
+    this.modalRef.hide(); debugger
+    this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
+  }
+  /*teste() {
+    this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
+  }*/
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
 
   decline(): void {
     this.modalRef.hide();

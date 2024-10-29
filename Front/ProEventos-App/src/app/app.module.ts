@@ -24,9 +24,21 @@ import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { LoteService } from './Services/lote.service';
 import { EventoService } from './Services/eventos.service';
 
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { ptBrLocale } from 'ngx-bootstrap/locale';
+
+
+
+<<<<<<< HEAD
+=======
+import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+import { EventoService } from './Services/eventos.service';
+
 import { AppComponent } from './app.component';
 import { NavComponent } from './shared/nav/nav.component';
 
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EventosComponent } from './components/eventos/eventos.component';
@@ -38,6 +50,8 @@ import { EventoListaComponent } from './components/eventos/evento-lista/evento-l
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
+
+defineLocale('pt-br', ptBrLocale);
 
 defineLocale('pt-br', ptBrLocale);
 

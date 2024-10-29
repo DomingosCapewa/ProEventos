@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="row">
   <div  [ngClass]="{'col-md-8 pr-0': modoEditar, 'col-md-12': !modoEditar}">
     <div class="card rounded shadow-sm">
@@ -167,6 +168,29 @@
                 placeholder="URL da imagem"
               />
 
+=======
+<div class="card rounded shadow-sm">
+  <form [formGroup]="form">
+    <div class="p-3">
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <label>Tema</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.tema)"
+            formControlName="tema"
+            placeholder="Insira o Tema"
+          />
+          <div *ngIf="formControllEventoDetalhe.tema.errors?.required" class="invalid-feedback">
+            O tema é obrigatório.
+          </div>
+          <div class="invalid-feedback" *ngIf="formControllEventoDetalhe.tema.errors?.minlength">
+            O tema deve ter no mínimo 4 caracteres.
+          </div>
+          <div class="invalid-feedback" *ngIf="formControllEventoDetalhe.tema.errors?.maxlength">
+            O tema deve ter no máximo 50 caracteres.
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
           </div>
         </div>
         <div class="card-footer">
@@ -300,6 +324,7 @@
           </fieldset>
         </div>
       </div>
+<<<<<<< HEAD
     </div>
     <button (click)="adicionarLote()" class="d-flex btn btn-outline-primary">
       <i class="fa fa-plus-circle my-1"></i>
@@ -331,9 +356,86 @@
 
             <input type="file" #file (change)="onFileChange($event)" class="form-control is-invalid" placeholder="" style="display: none">
 
+=======
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <label>Local</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.local)"
+            formControlName="local"
+            placeholder=""
+          />
+          <div *ngIf="formControllEventoDetalhe.local.errors?.required && formControllEventoDetalhe.local.touched" class="invalid-feedback">
+            Campo obrigatório.
           </div>
-
         </div>
+        <div class="form-group col-md-4">
+          <label>Data e Hora</label>
+          <input
+            type="datetime"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.dataEvento)"
+            value="{{evento.dataEvento | DateFormatPipe}}"
+            bsDatepicker
+            [bsConfig]="bsConfig"
+            formControlName="dataEvento"
+            placeholder=""
+          />
+          <div *ngIf="formControllEventoDetalhe.dataEvento.errors?.required && formControllEventoDetalhe.dataEvento.touched" class="invalid-feedback">
+            Campo obrigatório.
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label>Qtd Pessoas</label>
+          <input
+            type="number"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.qtdPessoas)"
+            formControlName="qtdPessoas"
+            placeholder=""
+          />
+          <div *ngIf="formControllEventoDetalhe.qtdPessoas.errors?.required && formControllEventoDetalhe.qtdPessoas.touched" class="invalid-feedback">
+            Campo obrigatório.
+          </div>
+          <div *ngIf="formControllEventoDetalhe.qtdPessoas.errors?.max && formControllEventoDetalhe.qtdPessoas.touched" class="invalid-feedback">
+            Campo deve ser menor que 120000.
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label>Telefone</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.telefone)"
+            formControlName="telefone"
+            placeholder="(00) 00000-0000"
+          />
+          <div *ngIf="formControllEventoDetalhe.telefone.errors?.required && formControllEventoDetalhe.telefone.touched" class="invalid-feedback">
+            Campo obrigatório.
+          </div>
+        </div>
+        <div class="form-group col-md-4">
+          <label>Email</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.email)"
+            formControlName="email"
+            placeholder="e-mail"
+          />
+          <div *ngIf="formControllEventoDetalhe.email.errors?.required && formControllEventoDetalhe.email.touched" class="invalid-feedback">
+            Campo obrigatório.
+          </div>
+          <div *ngIf="formControllEventoDetalhe.email.errors?.email && formControllEventoDetalhe.email.touched" class="invalid-feedback">
+           Deve ser um endereço de email válido.
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
+          </div>
+        </div>
+<<<<<<< HEAD
 
         <div class="card profile-card-2">
 
@@ -423,3 +525,32 @@
     </button>
   </div>
 </ng-template>
+=======
+        <div class="form-group col-md-4">
+          <label>Imagem</label>
+          <input
+            type="text"
+            class="form-control"
+            [ngClass]="cssValidator(formControllEventoDetalhe.imagemURL)"
+            formControlName="imagemURL"
+            placeholder="URL da imagem"
+          />
+          <div *ngIf="formControllEventoDetalhe.imagemURL.errors?.required && formControllEventoDetalhe.imagemURL.touched" class="invalid-feedback">
+            Campo obrigatório.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="d-flex">
+        <button class="btn btn-outline-secondary mr-auto border" (click)="resertForm()">
+          Cancelar Alteração
+        </button>
+        <button class="btn btn-success" [disabled]="!form.valid">
+          Salvar Evento
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)

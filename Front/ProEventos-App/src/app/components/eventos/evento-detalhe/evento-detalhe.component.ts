@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import {
   AbstractControl,
@@ -7,17 +8,26 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+=======
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
 import { Evento } from '@app/models/Evento';
 import { EventoService } from '@app/Services/eventos.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+<<<<<<< HEAD
 import { finalize } from 'rxjs/operators';
 import { Lote } from '@app/models/Lote';
 import { LoteService } from './../../../Services/lote.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { error } from 'console';
 import { environment } from '@environments/environment';
+=======
+import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -25,6 +35,7 @@ import { environment } from '@environments/environment';
   styleUrls: ['./evento-detalhe.component.scss'],
 })
 export class EventoDetalheComponent implements OnInit {
+<<<<<<< HEAD
   modalRef: BsModalRef;
   eventoId: number;
   evento = {} as Evento;
@@ -54,6 +65,23 @@ export class EventoDetalheComponent implements OnInit {
     private loteService: LoteService
   ) {
     this.localeService.use('pt-br');
+=======
+  evento = {} as Evento;
+  form: FormGroup;
+
+
+  constructor(
+    private fb: FormBuilder,
+    private localeService: BsLocaleService,
+    private router: ActivatedRoute,
+    private eventoService: EventoService,
+    private spinner: NgxSpinnerService,
+    private toastr: ToastrService
+  ) {
+    this.localeService.use('pt-br');
+
+
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
     this.form = this.fb.group({
       tema: [
         '',
@@ -68,6 +96,7 @@ export class EventoDetalheComponent implements OnInit {
       qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
+<<<<<<< HEAD
       imagemURL: [''],
       lotes: this.fb.array([]),
     });
@@ -113,6 +142,21 @@ export class EventoDetalheComponent implements OnInit {
           this.evento.lotes.forEach((lote) => {
             this.lotes.push(this.criarLote(lote));
           });
+=======
+      imagemURL: ['', Validators.required]
+    });
+  }
+
+  public carregarEvento(): void {
+    const eventoIdParam = this.router.snapshot.paramMap.get('id');
+
+    if (eventoIdParam !== null) {
+      this.spinner.show();
+      this.eventoService.getEventoById(+eventoIdParam).subscribe({
+        next: (evento: Evento) => {
+          this.evento = { ...evento };
+          this.form.patchValue(this.evento);
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
         },
         error: (err) => {
           this.spinner.hide();
@@ -134,6 +178,7 @@ export class EventoDetalheComponent implements OnInit {
     return this.form.controls;
   }
 
+<<<<<<< HEAD
   get bsConfig(): any {
     return {
       adaptivePosition: true,
@@ -266,5 +311,21 @@ export class EventoDetalheComponent implements OnInit {
       },
       () => {}
     ).add(() => this.spinner.hide());
+=======
+  get bsConfig() : any {
+    return {adaptivePosition: true,
+    dateInputFormat: 'DD/MM/YYYY hh:mm a',
+    containerClass: 'theme-default',
+    showWeekNumbers: false}
+  };
+
+
+  public resertForm(): void {
+    this.form.reset();
+  }
+
+  public cssValidator(campoForm: AbstractControl): any {
+    return { 'is-invalid': campoForm.errors && campoForm.touched }
+>>>>>>> beffbde (Seção 10- Angular - Registrando Eventos)
   }
 }
