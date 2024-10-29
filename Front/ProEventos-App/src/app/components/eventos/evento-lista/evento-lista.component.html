@@ -74,7 +74,7 @@
             type="button"
             class="btn btn-danger btn-lg"
             tooltip="Excluir"
-            (click)="openModal(template)"
+            (click)="openModal(template, evento.id)"
           >
             <i class="fa fa-trash"></i>
           </button>
@@ -99,7 +99,7 @@
     <button type="button" class="close" (click)="decline()">&times;</button>
   </div>
   <div class="modal-body text-center">
-    <p>Tem certeza que quer deletar este Evento?</p>
+    <p>Tem certeza que quer deletar o Evento de Código {{eventoId}}?</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" (click)="confirm()">

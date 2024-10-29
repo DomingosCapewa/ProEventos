@@ -7,7 +7,7 @@ namespace ProEventos.Domain
 
 {
 
-    [Table("EventosDetalhes")]
+    [Table("Eventos")]
     public class Evento
     {
         public int Id { get; set; }

@@ -16,6 +16,8 @@ export class EventoListaComponent implements OnInit {
   modalRef = {} as BsModalRef;
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
+  public eventoId = 0;
+
   largulaImgem = 130;
   margemImagem = 2;
   exibirImagem = true;
@@ -82,7 +84,8 @@ export class EventoListaComponent implements OnInit {
     });
   }
 
-  public openModal(template: TemplateRef<any>): void {
+  public openModal(template: TemplateRef<any>, eventoId: number): void {
+    this.eventoId = eventoId
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
@@ -90,9 +93,9 @@ export class EventoListaComponent implements OnInit {
     this.modalRef.hide(); debugger
     this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
   }
-  teste() {
+  /*teste() {
     this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
-  }
+  }*/
 
   public decline(): void {
     this.modalRef.hide();
