@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-evento-detalhe',
@@ -16,6 +17,7 @@ import { BsDaterangepickerConfig } from 'ngx-bootstrap/datepicker';
 export class EventoDetalheComponent implements OnInit {
   evento = {} as Evento;
   form: FormGroup;
+  estadoSalvar = 'post';
 
 
   constructor(
@@ -45,6 +47,8 @@ export class EventoDetalheComponent implements OnInit {
 
     if (eventoIdParam !== null) {
       this.spinner.show();
+
+      this.estadoSalvar = 'put';
       this.eventoService.getEventoById(+eventoIdParam).subscribe({
         next: (evento: Evento) => {
           this.evento = { ...evento };
@@ -85,4 +89,24 @@ export class EventoDetalheComponent implements OnInit {
   public cssValidator(campoForm: AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched }
   }
-}
+
+  public salvarAlteracao(): any {
+    this.spinner.show();
+    if(this.form.valid) {
+      this.evento = (this.estadoSalvar === 'post')
+               ? {...this.form.value}
+               : this.evento = {id: this.evento.id, ...this.form.value};
+      }
+      this.eventoService[this.estadoSalvar](this.evento).pipe(
+        finalize(() => this.spinner.hide())
+      ).subscribe(
+          () => this.toastr.success('Evento salvo com Sucesso!', 'Sucesso'),
+          (err: any) => {
+            console.error(err);
+            this.spinner.hide()
+            this.toastr.error('Erro ao salvar evento', 'Erro');
+          },
+          () => this.spinner.hide()
+      );
+    }
+  }
