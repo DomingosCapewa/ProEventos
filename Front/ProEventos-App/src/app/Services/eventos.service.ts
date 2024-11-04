@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import { Evento } from '@app/models/Evento';
 import { take } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EventoService {
 
     baseURL = 'https://localhost:5001/api/eventos';

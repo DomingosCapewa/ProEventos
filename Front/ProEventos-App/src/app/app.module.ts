@@ -19,6 +19,8 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
+
+import { LoteService } from './Services/lote.service';
 import { EventoService } from './Services/eventos.service';
 
 import { AppComponent } from './app.component';
@@ -35,6 +37,7 @@ import { EventoListaComponent } from './components/eventos/evento-lista/evento-l
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
+
 
 
 defineLocale('pt-br', ptBrLocale);
@@ -72,7 +75,11 @@ defineLocale('pt-br', ptBrLocale);
     ToastrModule.forRoot({ positionClass: 'inline' }),
     NgxSpinnerModule,
   ],
-  providers: [EventoService],
+  providers: [
+        EventoService,
+        LoteService
+
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
