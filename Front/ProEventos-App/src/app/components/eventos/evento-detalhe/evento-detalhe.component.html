@@ -208,7 +208,7 @@
         >
           <fieldset [formGroupName]="i" class="form-group">
             <legend class="d-flex justify-content-between capitalize">
-              <button
+              <button (click)="removerLote(template, i)"
                 class="p-2 btn btn-sm btn-outline-warning mb-1 d-flex"
                 tooltip="Excluir Lote"
                 [adaptivePosition]="false"
@@ -291,3 +291,16 @@
   </div>
 </div>
 <br>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmar Exclusão</h4>
+    <button type="button" class="close" (click)="decline()">&times;</button>
+  </div>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar o Lote de Código {{ this.loteAtual.nome}}?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="confirmDeleteLote()">Sim</button>
+    <button type="button" class="btn btn-primary" (click)="declineDeliteLote()">Não</button>
+  </div>
+</ng-template>
