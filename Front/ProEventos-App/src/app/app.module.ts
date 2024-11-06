@@ -5,12 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
+
+
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule} from 'ngx-currency';
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -61,7 +64,8 @@ defineLocale('pt-br', ptBrLocale);
 
   ],
   imports: [
-    BrowserModule,
+
+  BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -74,6 +78,8 @@ defineLocale('pt-br', ptBrLocale);
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({ positionClass: 'inline' }),
     NgxSpinnerModule,
+    NgxCurrencyModule
+
   ],
   providers: [
         EventoService,

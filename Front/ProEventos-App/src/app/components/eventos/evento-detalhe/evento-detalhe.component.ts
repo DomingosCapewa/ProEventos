@@ -56,6 +56,10 @@ export class EventoDetalheComponent implements OnInit {
     });
   }
 
+  public mudarValorData(value: Date, indice: number, campo: string): void {
+          this.lotes.value[indice]['campo'] = value;
+  }
+
   adicionarLote(): void {
     this.lotes.push(this.criarLote({ id: 0 } as Lote));
   }
@@ -80,7 +84,7 @@ export class EventoDetalheComponent implements OnInit {
 
     if (this.eventoId !== null && this.eventoId !== 0) {
       this.spinner.show();
-   
+
       this.estadoSalvar = 'put';
       this.eventoService.getEventoById(this.eventoId).subscribe({
         next: (evento: Evento) => {
@@ -118,6 +122,19 @@ export class EventoDetalheComponent implements OnInit {
       showWeekNumbers: false
     };
   }
+  get bsConfigLote(): any {
+    return {
+      adaptivePosition: true,
+      dateInputFormat: 'DD/MM/YYYY hh:mm a',
+      containerClass: 'theme-default',
+      showWeekNumbers: false
+    };
+  }
+
+  retornaTituloLote(nome: string): string {
+    return nome === null || nome ===''
+    ? 'Nome do lote' : nome;
+  }
 
   public cssValidator(campoForm: AbstractControl): any {
     return { 'is-invalid': campoForm.errors && campoForm.touched };
@@ -126,8 +143,8 @@ export class EventoDetalheComponent implements OnInit {
   public salvarEvento(): any {
     this.spinner.show();
     if (this.form.valid) {
-      this.evento = (this.estadoSalvar === 'post') 
-                   ? { ...this.form.value } 
+      this.evento = (this.estadoSalvar === 'post')
+                   ? { ...this.form.value }
                    : { id: this.evento.id, ...this.form.value };
 
       this.eventoService[this.estadoSalvar](this.evento).pipe(
@@ -148,13 +165,14 @@ export class EventoDetalheComponent implements OnInit {
   }
 
   public salvarLotes(): void {
-    this.spinner.show();
+
     if (this.form.controls.lotes.valid) {
-      this.loteService.saveLote(this.eventoId, this.form.value.lotes) 
+      this.spinner.show();
+      this.loteService.saveLote(this.eventoId, this.form.value.lotes)
                       .subscribe(
                         () => {
                           this.toastr.success('Lotes salvos com sucesso!', 'Sucesso!');
-                          this.lotes.clear(); 
+                          this.lotes.clear();
                         },
                         (error: any) => {
                           this.toastr.error('Erro ao tentar salvar lotes.', 'Erro!');
@@ -165,7 +183,7 @@ export class EventoDetalheComponent implements OnInit {
 
   public removerLote(template: TemplateRef<any>,
                       indice: number): void {
-                       
+
                         this.loteAtual.id = this.lotes.get(indice + '.id').value;
                         this.loteAtual.nome = this.lotes.get(indice + '.nome').value;
                         this.loteAtual.indice = indice;

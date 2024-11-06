@@ -31,23 +31,23 @@ export class EventoListaComponent implements OnInit {
     private router: Router
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.spinner.show();
     this.carregarEventos();
   }
 
-  public get filtroLista() {
+  get filtroLista() {
     return this.filtroListado;
   }
 
-  public set filtroLista(value: string) {
+  set filtroLista(value: string) {
     this.filtroListado = value;
     this.eventosFiltrados = this.filtroLista
       ? this.filtrarEventos(this.filtroLista)
       : this.eventos;
   }
 
-  public filtrarEventos(filtrarPor: string): Evento[] {
+  filtrarEventos(filtrarPor: string): Evento[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.eventos.filter(
       (evento: Evento) =>
@@ -57,11 +57,11 @@ export class EventoListaComponent implements OnInit {
     );
   }
 
-  public alterarImagem() {
+  alterarImagem() {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  public carregarEventos(): void {
+  carregarEventos(): void {
     const timeoutDuration = 3000;
     const hideSpinner = setTimeout(() => {
       this.spinner.hide();
@@ -84,35 +84,29 @@ export class EventoListaComponent implements OnInit {
     });
   }
 
-  public openModal(template: TemplateRef<any>, eventoId: number): void {
+  openModal(template: TemplateRef<any>, eventoId: number): void {
     this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
-  public confirm(): void {
+  confirm(): void {
     this.modalRef.hide();
-    this.spinner.show(); // Exibe o spinner
+    this.spinner.show();
 
     this.eventoService.deleteEvento(this.eventoId).subscribe({
         next: (result: any) => {
             console.log(result);
             this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
-            this.carregarEventos(); // Atualiza a lista de eventos
+            this.carregarEventos();
         },
         error: (error: any) => {
             console.error(error);
             this.toastr.error(`Erro ao tentar deletar o evento ${this.eventoId}`, 'Erro');
         }
     }).add(() => this.spinner.hide());
-}
-  
+  }
 
-  // private carregarEventos() {
-  //   this.eventos = this.eventos.filter(evento => evento.id !== this.eventoId);
-  //   this.eventosFiltrados = this.filtrarEventos(this.filtroLista);
-  // }
-
-  public decline(): void {
+  decline(): void {
     this.modalRef.hide();
   }
 
