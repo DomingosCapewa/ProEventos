@@ -5,12 +5,12 @@ import { ToastrService } from 'ngx-toastr';
 import { Evento } from '@app/models/Evento';
 import { EventoService } from '@app/Services/eventos.service';
 import { Router } from '@angular/router';
-
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
   templateUrl: './evento-lista.component.html',
-  styleUrls: ['./evento-lista.component.scss']
+  styleUrls: ['./evento-lista.component.scss'],
 })
 export class EventoListaComponent implements OnInit {
   modalRef = {} as BsModalRef;
@@ -60,7 +60,11 @@ export class EventoListaComponent implements OnInit {
   alterarImagem() {
     this.exibirImagem = !this.exibirImagem;
   }
-
+  imagemURL(imagemURL: string): string {
+    return imagemURL !== ''
+      ? `${environment.apiURL}resources/images/${imagemURL}`
+      : 'assets/Foto2.jpeg';
+  }
   carregarEventos(): void {
     const timeoutDuration = 3000;
     const hideSpinner = setTimeout(() => {
@@ -93,17 +97,23 @@ export class EventoListaComponent implements OnInit {
     this.modalRef.hide();
     this.spinner.show();
 
-    this.eventoService.deleteEvento(this.eventoId).subscribe({
+    this.eventoService
+      .deleteEvento(this.eventoId)
+      .subscribe({
         next: (result: any) => {
-            console.log(result);
-            this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
-            this.carregarEventos();
+          console.log(result);
+          this.toastr.success('O evento foi deletado com sucesso', 'Deletado!');
+          this.carregarEventos();
         },
         error: (error: any) => {
-            console.error(error);
-            this.toastr.error(`Erro ao tentar deletar o evento ${this.eventoId}`, 'Erro');
-        }
-    }).add(() => this.spinner.hide());
+          console.error(error);
+          this.toastr.error(
+            `Erro ao tentar deletar o evento ${this.eventoId}`,
+            'Erro'
+          );
+        },
+      })
+      .add(() => this.spinner.hide());
   }
 
   decline(): void {

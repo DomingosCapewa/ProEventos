@@ -5,21 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
-
-
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { NgxCurrencyModule} from 'ngx-currency';
+import { NgxCurrencyModule } from "ngx-currency";
+
+
 
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
-
-
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 
@@ -41,8 +39,6 @@ import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistrationComponent } from './components/user/registration/registration.component';
 
-
-
 defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
@@ -61,11 +57,9 @@ defineLocale('pt-br', ptBrLocale);
     UserComponent,
     LoginComponent,
     RegistrationComponent,
-
   ],
   imports: [
-
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -79,13 +73,8 @@ defineLocale('pt-br', ptBrLocale);
     ToastrModule.forRoot({ positionClass: 'inline' }),
     NgxSpinnerModule,
     NgxCurrencyModule
-
   ],
-  providers: [
-        EventoService,
-        LoteService
-
-  ],
+  providers: [EventoService, LoteService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
